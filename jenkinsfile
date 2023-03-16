@@ -31,7 +31,7 @@ pipeline{
                 cd /home/ubuntu/worky-dev-app/
                 npm i 
                 npm start
-                echo build stage is scucess fully run
+                echo build stage is scucessfully run jobs
                 '''
             }
         }
