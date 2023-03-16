@@ -1,0 +1,41 @@
+pipeline{
+    agent{
+        label'dev'
+    }
+    stages{
+        stage('remove backup'){
+            steps{
+                 sh '''
+                 rm -rf /home/ubuntu/dev-app-backup/*
+                 '''
+            }
+        }
+        stage('backup'){
+            steps{
+                sh '''
+                cp -r /home/ubuntu/worky-dev-app/* /home/ubuntu/dev-app-backup/
+                rm -rf /home/ubuntu/worky-dev-app/* 
+                '''
+            }
+        }
+        stage('new code copy'){
+            steps{
+                sh '''
+                cp -r * /home/ubuntu/worky-dev-app/
+                '''
+            }
+        }
+        stage('build'){
+            steps{
+                sh '''
+                cd /home/ubuntu/worky-dev-app/
+                npm i 
+                npm start
+                echo build stage is scucess fully run
+                '''
+            }
+        }
+    }
+    
+}
+
